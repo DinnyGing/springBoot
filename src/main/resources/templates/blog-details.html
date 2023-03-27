@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Site`s blog</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<h1 class="visually-hidden">Blog </h1>
+
+<header th:insert="blocks/header :: header"></header>
+</br>
+
+<div class="container mt-5">
+  <div th:each="el : ${post}" class="alert alert-info mt-2">
+    <h1 th:text="${el.title}"/>
+    <p th:text="${el.full_text}"/>
+    <p> <b>Views: </b> <span th:text="${el.views}"/></p>
+    <div style="display: flex; flex-wrap: nowrap; justify-content: space-between; width: 15%">
+      <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">Update</a>
+      <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
+        <button type="submit" class="btn btn-warning">Delete</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+
+</body>
+</html>
